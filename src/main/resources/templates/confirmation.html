@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Email Template</title>
+    </head>
+    <body>
+    <h1 th:text="${'Olá ' + name}"></h1>
+        <p>Para confirmar seu email click no botão abaixo:</p>
+
+        <a th:href="@{'https://localhost:3000/auth/confirm/' + ${confirmationToken}}">CONFIRMAR</a>
+    </body>
+</html>
