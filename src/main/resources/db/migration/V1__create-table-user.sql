@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS taskfy_user (
+  id TEXT PRIMARY KEY UNIQUE NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  avatar_url TEXT,
+  email TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
