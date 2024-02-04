@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS taskfy_refresh_token (
+  id TEXT PRIMARY KEY UNIQUE NOT NULL,
+  user_id TEXT REFERENCES taskfy_user(id) ON DELETE CASCADE NOT NULL,
+  expires_at TIMESTAMP NOT NULL,
+  is_valid BOOLEAN NOT NULL DEFAULT true
+);
