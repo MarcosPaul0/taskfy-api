@@ -1,0 +1,1 @@
+ALTER TABLE taskfy_task_group ADD COLUMN primary_color VARCHAR(8) NOT NULL DEFAULT '10B981';
