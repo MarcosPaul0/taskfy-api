@@ -1,0 +1,1 @@
+ALTER TABLE taskfy_refresh_token DROP COLUMN is_valid;
