@@ -14,7 +14,6 @@ public class GetUserController {
 
   @GetMapping
   public ResponseEntity<UserDetails> handle(@AuthenticationPrincipal UserDetails user) {
-    throw new RuntimeException();
-
+    return ResponseEntity.ok(user);
   }
 }
