@@ -13,7 +13,6 @@ import com.api.taskfy.errors.taskGroupUser.*;
 import com.api.taskfy.errors.user.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,11 +28,6 @@ public class RequestExceptionHandler {
         );
 
         return new ResponseEntity<>(apiException, exception.getStatus());
-    }
-
-    @ExceptionHandler(value = {DefaultException.class})
-    public ResponseEntity<Object> handleRuntimeException(DefaultException exception) {
-        return this.handleDefaultException(exception);
     }
 
     @ExceptionHandler(value = {UserAlreadyExistsException.class})
@@ -162,17 +156,30 @@ public class RequestExceptionHandler {
         return this.handleDefaultException(exception);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
+    @ExceptionHandler(value = {InvalidTokenException.class})
+    public ResponseEntity<Object> handleInvalidTokenException(InvalidTokenException exception) {
+        System.out.println("TESTE DE ERRO DE TOKEN");
+        return this.handleDefaultException(exception);
+    }
 
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleInvalidArgument(MethodArgumentNotValidException exception) {
+        StringBuilder errorsBuilder = new StringBuilder();
+        exception.getBindingResult().getFieldErrors().forEach(fieldError -> {
+            errorsBuilder.append(fieldError.getField())
+                    .append(": ")
+                    .append(fieldError.getDefaultMessage())
+                    .append("; ");
         });
 
-        return ResponseEntity.badRequest().body(errors);
+        String errorsString = errorsBuilder.toString();
+
+        ApiException apiException = new ApiException(
+                "Validation error: " + errorsString,
+                HttpStatus.BAD_REQUEST,
+                ZonedDateTime.now(ZoneId.of("Z"))
+        );
+
+        return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
     }
 }
