@@ -3,6 +3,8 @@ package com.api.taskfy.modules.user.useCases.authUser;
 import com.api.taskfy.constants.Routes;
 import com.api.taskfy.modules.user.dtos.AuthUserDto;
 import com.api.taskfy.modules.user.dtos.TokenResponseDto;
+
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,10 @@ public class AuthUserController {
     AuthUserService authUserService;
 
     @PostMapping
-    public ResponseEntity<TokenResponseDto> handle(@Valid @RequestBody AuthUserDto authUserDto) {
+    public ResponseEntity<TokenResponseDto> handle(@Valid @RequestBody AuthUserDto authUserDto, HttpServletResponse httpResponse) {
         var authResponse = this.authUserService.execute(authUserDto);
+
+        httpResponse.setHeader("Access-Control-Allow-Origin", "*");
 
         return ResponseEntity.ok(authResponse);
     }

@@ -6,6 +6,6 @@ import com.api.taskfy.modules.user.entities.User;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, String>, CustomUserRepository {
     Optional<User> findByEmail(String email);
 }
