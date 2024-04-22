@@ -74,17 +74,13 @@ public class TokenService implements UserDetailsService {
     }
 
     public String validateAuthToken(String token, String secret) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+        Algorithm algorithm = Algorithm.HMAC256(secret);
 
-            return JWT.require(algorithm)
-                    .withIssuer("taskfy-api")
-                    .build()
-                    .verify(token)
-                    .getSubject();
-        } catch(JWTVerificationException exception) {
-            throw new InvalidTokenException();
-        }
+        return JWT.require(algorithm)
+                .withIssuer("taskfy-api")
+                .build()
+                .verify(token)
+                .getSubject();
     }
 
     public Boolean validateToken(String token, String secret) {
