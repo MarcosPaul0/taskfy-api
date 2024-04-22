@@ -2,8 +2,6 @@ package com.api.taskfy.errors;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.api.taskfy.errors.ranking.*;
 import com.api.taskfy.errors.reward.RewardNotFoundException;
@@ -16,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class RequestExceptionHandler {
@@ -158,7 +155,6 @@ public class RequestExceptionHandler {
 
     @ExceptionHandler(value = {InvalidTokenException.class})
     public ResponseEntity<Object> handleInvalidTokenException(InvalidTokenException exception) {
-        System.out.println("TESTE DE ERRO DE TOKEN");
         return this.handleDefaultException(exception);
     }
 
