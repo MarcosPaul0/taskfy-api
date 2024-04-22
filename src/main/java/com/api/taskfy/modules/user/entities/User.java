@@ -3,6 +3,7 @@ package com.api.taskfy.modules.user.entities;
 import com.api.taskfy.constants.Entities;
 import com.api.taskfy.constants.Tables;
 import com.api.taskfy.modules.ranking.entities.UserPlacement;
+import com.api.taskfy.modules.task.entities.Task;
 import com.api.taskfy.modules.taskGroup.entities.TaskGroup;
 import com.api.taskfy.modules.taskGroupUser.entities.TaskGroupUser;
 import com.api.taskfy.modules.user.dtos.CreateUserDto;
@@ -60,6 +61,10 @@ public class User implements UserDetails {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<TaskGroupUser> taskGroupUserList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Task> taskList;
 
     @PrePersist
     public void prePersist() {
