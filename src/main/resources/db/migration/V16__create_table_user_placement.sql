@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS taskfy_user_placement (
+  id TEXT PRIMARY KEY UNIQUE NOT NULL,
+  ranking_id TEXT REFERENCES taskfy_ranking(id) ON DELETE CASCADE NOT NULL,
+  user_id TEXT REFERENCES taskfy_user(id) ON DELETE CASCADE NOT NULL,
+  points INTEGER NOT NULL DEFAULT 0
+);
