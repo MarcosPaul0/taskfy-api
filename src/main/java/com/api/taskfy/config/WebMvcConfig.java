@@ -2,6 +2,7 @@ package com.api.taskfy.config;
 
 import com.api.taskfy.modules.taskGroup.policy.TaskGroupPolicy;
 import com.api.taskfy.modules.taskGroupUser.policies.GroupsByUserPolicy;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -26,4 +27,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(this.groupsByUserPolicy())
                 .addPathPatterns("/task-group-user/group/{groupId}");
     }
+
 }

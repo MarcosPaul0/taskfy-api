@@ -1,0 +1,1 @@
+ALTER TABLE taskfy_task_group ADD COLUMN banner_url TEXT;

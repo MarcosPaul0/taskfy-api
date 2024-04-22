@@ -1,0 +1,2 @@
+ALTER TABLE taskfy_task
+    ALTER COLUMN id TYPE TEXT;
