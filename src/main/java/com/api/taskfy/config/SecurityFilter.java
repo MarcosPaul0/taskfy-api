@@ -59,6 +59,10 @@ public class SecurityFilter extends OncePerRequestFilter {
 
                 var userFound = this.userRepository.findByEmail(email);
 
+                if (userFound.isEmpty()) {
+                    throw new JWTVerificationException("User not found");
+                }
+
                 var user = userFound.get();
 
                 var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
