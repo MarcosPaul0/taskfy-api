@@ -1,13 +1,12 @@
 package com.api.taskfy.modules.taskGroupUser.useCases.findTaskGroupUserByUserId;
 
 import com.api.taskfy.constants.Routes;
-import com.api.taskfy.modules.taskGroupUser.entities.TaskGroupUser;
+import com.api.taskfy.modules.taskGroupUser.dtos.response.TaskGroupUserResponseDto;
 import com.api.taskfy.modules.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +19,7 @@ public class FindTaskGroupUserByUserIdController {
     FindTaskGroupUserByUserIdService findTaskGroupUserByUserIdService;
 
     @GetMapping("/user")
-    public ResponseEntity<List<TaskGroupUser>> handle(@AuthenticationPrincipal User user) {
+    public ResponseEntity<List<TaskGroupUserResponseDto>> handle(@AuthenticationPrincipal User user) {
         var taskGroupUserList = this.findTaskGroupUserByUserIdService.execute(user);
 
         return ResponseEntity.ok(taskGroupUserList);
