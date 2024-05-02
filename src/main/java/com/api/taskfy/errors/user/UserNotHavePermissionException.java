@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public class UserNotHavePermissionException extends DefaultException {
-    public static String message = "User does not have permission to access this resource";
+    public static String message = "User does not have permission to perform this action";
 
     public UserNotHavePermissionException() {
         super(message, HttpStatus.FORBIDDEN);
