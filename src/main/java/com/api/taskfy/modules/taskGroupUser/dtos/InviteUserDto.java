@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-public class CreateTaskGroupUserDto {
+public class InviteUserDto {
     @NotNull(message = "User id is required")
     @Email(message = "Email is invalid")
     public String email;
