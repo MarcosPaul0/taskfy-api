@@ -2,7 +2,7 @@ package com.api.taskfy.modules.taskGroupUser.entities;
 
 import com.api.taskfy.constants.Entities;
 import com.api.taskfy.constants.Tables;
-import com.api.taskfy.modules.taskGroupUser.dtos.CreateTaskGroupUserDto;
+import com.api.taskfy.modules.taskGroupUser.dtos.InviteUserDto;
 import com.api.taskfy.modules.taskGroupUser.enums.InviteStatus;
 import com.api.taskfy.modules.taskGroupUser.enums.RequestStatus;
 import com.api.taskfy.modules.taskGroupUser.enums.TaskGroupRole;
@@ -66,7 +66,7 @@ public class TaskGroupUser {
         updatedAt = LocalDateTime.now();
     }
 
-    public TaskGroupUser(CreateTaskGroupUserDto createTaskGroupUserDto) {
+    public TaskGroupUser(InviteUserDto createTaskGroupUserDto) {
         this.groupId = createTaskGroupUserDto.groupId;
         this.taskGroupRole = TaskGroupRole.valueOf(createTaskGroupUserDto.taskGroupRole);
     }
