@@ -3,11 +3,11 @@ package com.api.taskfy.modules.taskGroupUser.useCases.updateTaskGroupUser;
 import com.api.taskfy.errors.taskGroup.TaskGroupNotFoundException;
 import com.api.taskfy.errors.taskGroupUser.TaskGroupUserNotFoundException;
 import com.api.taskfy.errors.taskGroupUser.TaskGroupUserOwnerNotFoundException;
-import com.api.taskfy.errors.user.UserNotFoundException;
 import com.api.taskfy.modules.taskGroup.repositories.TaskGroupRepository;
 import com.api.taskfy.modules.taskGroupUser.dtos.UpdateTaskGroupUserDto;
 import com.api.taskfy.modules.taskGroupUser.enums.TaskGroupRole;
 import com.api.taskfy.modules.taskGroupUser.repositories.TaskGroupUserRepository;
+import com.api.taskfy.modules.user.entities.User;
 import com.api.taskfy.modules.user.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,15 +23,7 @@ public class UpdateTaskGroupUserService {
     @Autowired
     UserRepository userRepository;
 
-    public void execute(String userId, String groupUserId, UpdateTaskGroupUserDto updateTaskGroupUserDto) {
-        var userFound = this.userRepository.findById(userId);
-
-        if (userFound.isEmpty()) {
-            throw new UserNotFoundException();
-        }
-
-        var user = userFound.get();
-
+    public void execute(User user, String groupUserId, UpdateTaskGroupUserDto updateTaskGroupUserDto) {
         var taskGroupUserFound = this.taskGroupUserRepository.findById(groupUserId);
 
         if (taskGroupUserFound.isEmpty()) {
