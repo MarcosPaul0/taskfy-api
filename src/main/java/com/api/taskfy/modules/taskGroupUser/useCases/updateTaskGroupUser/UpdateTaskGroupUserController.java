@@ -21,7 +21,7 @@ public class UpdateTaskGroupUserController {
             @PathVariable("groupUserId") String groupUserId,
             @Valid @RequestBody UpdateTaskGroupUserDto updateTaskGroupUserDto
     ) {
-        this.updateTaskGroupUserService.execute(user.getId(), groupUserId, updateTaskGroupUserDto);
+        this.updateTaskGroupUserService.execute(user, groupUserId, updateTaskGroupUserDto);
 
         return ResponseEntity.ok().build();
     }
