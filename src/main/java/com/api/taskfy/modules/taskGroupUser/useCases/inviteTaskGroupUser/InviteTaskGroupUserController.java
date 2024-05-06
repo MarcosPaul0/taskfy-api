@@ -1,7 +1,7 @@
 package com.api.taskfy.modules.taskGroupUser.useCases.inviteTaskGroupUser;
 
 import com.api.taskfy.constants.Routes;
-import com.api.taskfy.modules.taskGroupUser.dtos.CreateTaskGroupUserDto;
+import com.api.taskfy.modules.taskGroupUser.dtos.InviteUserDto;
 import com.api.taskfy.modules.user.entities.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,12 @@ public class InviteTaskGroupUserController {
     @Autowired
     InviteTaskGroupUserService inviteTaskGroupUserService;
 
-    @PostMapping("/send/invite")
+    @PostMapping("/send/invite-user")
     public ResponseEntity<Void> handle(
-            @Valid @RequestBody CreateTaskGroupUserDto createTaskGroupUserDto,
+            @Valid @RequestBody InviteUserDto inviteUserDto,
             @AuthenticationPrincipal User user
     ) {
-        this.inviteTaskGroupUserService.execute(user.getId(), createTaskGroupUserDto);
+        this.inviteTaskGroupUserService.execute(user.getId(), inviteUserDto);
 
         return ResponseEntity.ok().build();
     }
