@@ -31,6 +31,9 @@ public class TaskGroup {
     @Column(name = "primary_color")
     private String primaryColor;
 
+    @Column(name = "banner_url")
+    private String bannerUrl;
+
     @Column(name = "is_private")
     private Boolean isPrivate;
 
