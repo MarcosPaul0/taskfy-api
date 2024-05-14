@@ -1,7 +1,5 @@
 package com.api.taskfy.modules.taskGroup.useCases.deleteTaskGroup;
 
-import com.api.taskfy.errors.taskGroup.TaskGroupNotFoundException;
-import com.api.taskfy.errors.user.UserNotFoundException;
 import com.api.taskfy.modules.taskGroup.repositories.TaskGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
