@@ -39,12 +39,12 @@ public class FindRewardsByRankingService {
         if (taskGroupFound.isEmpty()) {
             throw new TaskGroupNotFoundException();
         }
-
-        var taskGroup = taskGroupFound.get();
-
-        if (taskGroup.getIsPrivate()) {
-            throw new PrivateGroupException();
-        }
+//        TODO validar se uruário pertence ao grupo de tarefas
+//        var taskGroup = taskGroupFound.get();
+//
+//        if (taskGroup.getIsPrivate()) {
+//            throw new PrivateGroupException();
+//        }
 
         return rewardList;
     }
