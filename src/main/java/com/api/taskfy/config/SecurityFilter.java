@@ -1,6 +1,6 @@
 package com.api.taskfy.config;
 
-import com.api.taskfy.errors.ApiException;
+import com.api.taskfy.errors.user.InvalidTokenException;
 import com.api.taskfy.modules.user.repositories.UserRepository;
 
 import com.api.taskfy.services.TokenService;
@@ -21,8 +21,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -77,17 +75,12 @@ public class SecurityFilter extends OncePerRequestFilter {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule());
 
-            ApiException apiException = new ApiException(
-                    "Invalid token",
-                    HttpStatus.BAD_REQUEST,
-                    ZonedDateTime.now(ZoneId.of("Z"))
-            );
-
-            String jsonResponseBody = objectMapper.writeValueAsString(apiException);
+            String errorResponse =
+                    objectMapper.writeValueAsString(new InvalidTokenException());
 
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.getWriter().write(jsonResponseBody);
+            response.getWriter().write(errorResponse);
         }
     }
 }

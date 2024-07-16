@@ -34,16 +34,14 @@ public class CreateRankingService {
     @Autowired
     TaskGroupRepository taskGroupRepository;
 
-    public void execute(String userId, CreateRankingDto createRankingDto) {
-        var groupId = createRankingDto.groupId;
-
-        var groupFound = this.taskGroupRepository.findById(groupId);
+    public void execute(String userId, String taskGroupId, CreateRankingDto createRankingDto) {
+        var groupFound = this.taskGroupRepository.findById(taskGroupId);
 
         if (groupFound.isEmpty()) {
             throw new TaskGroupNotFoundException();
         }
 
-        var taskGroupUserFound = this.taskGroupUserRepository.findByUserIdAndGroupId(userId, groupId);
+        var taskGroupUserFound = this.taskGroupUserRepository.findByUserIdAndGroupId(userId, taskGroupId);
 
         if (taskGroupUserFound.isEmpty()) {
             throw new TaskGroupUserNotFoundException();
@@ -57,7 +55,7 @@ public class CreateRankingService {
         }
 
         var rankingFound =
-                this.rankingRepository.findByPeriodAndGroupId(LocalDateTime.now(), groupId);
+                this.rankingRepository.findByPeriodAndGroupId(LocalDateTime.now(), taskGroupId);
 
         if (!rankingFound.isEmpty()) {
             throw new AlreadyHasNewRankingException();
@@ -65,10 +63,12 @@ public class CreateRankingService {
 
         var newRanking = new Ranking(createRankingDto);
 
+        newRanking.setGroupId(taskGroupId);
+
         var savedRanking = this.rankingRepository.save(newRanking);
 
         var taskGroupUsers =
-                this.taskGroupUserRepository.findByGroupIdAndStatus(groupId, InviteStatus.ACCEPTED, RequestStatus.ACCEPTED);
+                this.taskGroupUserRepository.findByGroupIdAndStatus(taskGroupId, InviteStatus.ACCEPTED, RequestStatus.ACCEPTED);
 
         List<UserPlacement> userPlacements = taskGroupUsers.stream()
                 .map(taskGroupUserRanking -> {

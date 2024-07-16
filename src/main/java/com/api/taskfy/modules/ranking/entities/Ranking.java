@@ -40,10 +40,10 @@ public class Ranking {
     @PrePersist
     public void prePersist() {
         if (createdAt == null) {
-            createdAt = LocalDateTime.now();
+            this.createdAt = LocalDateTime.now();
         }
         if (updatedAt == null) {
-            updatedAt = LocalDateTime.now();
+            this.updatedAt = LocalDateTime.now();
         }
     }
 
@@ -54,6 +54,5 @@ public class Ranking {
 
     public Ranking (CreateRankingDto createRankingDto) {
         this.dueDate = createRankingDto.dueDate;
-        this.groupId = createRankingDto.groupId;
     }
 }
