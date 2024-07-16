@@ -24,7 +24,7 @@ public class FindAllRankingsByGroupService {
             throw new UserNotBelongsToTaskGroupException();
         }
 
-        return this.rankingRepository.findAllByGroupId(groupId);
+        return this.rankingRepository.findAllByGroupIdOrderByDueDateAsc(groupId);
     }
 
 }
