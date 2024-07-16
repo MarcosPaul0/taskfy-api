@@ -1,6 +1,5 @@
 package com.api.taskfy.services;
 
-import com.api.taskfy.errors.user.InvalidTokenException;
 import com.api.taskfy.errors.user.UserNotFoundException;
 import com.api.taskfy.modules.user.entities.RefreshToken;
 import com.api.taskfy.modules.user.entities.User;
@@ -13,7 +12,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

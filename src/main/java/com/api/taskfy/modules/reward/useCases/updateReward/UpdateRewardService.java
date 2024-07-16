@@ -54,7 +54,7 @@ public class UpdateRewardService {
         }
 
         if (updateRewardDto.title != null && !updateRewardDto.title.isBlank()) {
-            reward.setDescription(updateRewardDto.title);
+            reward.setTitle(updateRewardDto.title);
         }
 
         if (updateRewardDto.description != null && !updateRewardDto.description.isBlank()) {
