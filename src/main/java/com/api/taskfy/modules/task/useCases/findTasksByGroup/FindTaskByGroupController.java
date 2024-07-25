@@ -4,12 +4,10 @@ import com.api.taskfy.constants.Routes;
 import com.api.taskfy.modules.task.entities.Task;
 import com.api.taskfy.modules.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,11 +18,13 @@ public class FindTaskByGroupController {
     FindTaskByGroupService findTaskByGroupService;
 
     @GetMapping("/group/{groupId}")
-    public ResponseEntity<List<Task>> handle(
+    public ResponseEntity<Page<Task>> handle(
             @AuthenticationPrincipal User user,
-            @PathVariable("groupId") String groupId
+            @PathVariable("groupId") String groupId,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "title", defaultValue = "") String title
     ) {
-        var taskList = this.findTaskByGroupService.execute(user.getId(), groupId);
+        var taskList = this.findTaskByGroupService.execute(user.getId(), groupId, title, page);
 
         return ResponseEntity.ok(taskList);
     }
